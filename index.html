@@ -55,6 +55,10 @@
       font-weight: 500;
     }
 
+    nav a.active {
+      border-bottom: 2px solid var(--accent);
+    }
+
     nav a:hover {
       text-decoration: underline;
     }
@@ -163,6 +167,29 @@
       color: #f9fafb;
     }
 
+    .timeline {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -9px;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .counter {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
     @media (max-width: 600px) {
       header h1 {
         font-size: 2rem;
@@ -178,11 +205,11 @@
 
 <nav>
   <div>
-    <a href="#contact">Contact</a>
-    <a href="#summary">Summary</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#summary" class="nav-link">Summary</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#projects" class="nav-link">Projects</a>
   </div>
   <button class="toggle-mode" onclick="toggleDarkMode()">Toggle Mode</button>
 </nav>
@@ -206,43 +233,31 @@
 
   <section id="summary" class="summary section">
     <h2>🧠 Professional Summary</h2>
-    <p>Tech-savvy IT professional with 6+ years of experience in cybersecurity, DevOps, cloud, and AI-driven development. Skilled in Docker, Jenkins, Linux, and tools like ChatGPT and Copilot. Proven ability to streamline operations, automate workflows, and secure infrastructure in enterprise environments.</p>
+    <p>Tech-savvy IT professional with <span class="counter" data-target="6">0</span>+ years of experience in cybersecurity, DevOps, cloud, and AI-driven development. Skilled in Docker, Jenkins, Linux, and tools like ChatGPT and Copilot. Proven ability to streamline operations, automate workflows, and secure infrastructure in enterprise environments.</p>
   </section>
 
   <section id="experience" class="experience section">
     <h2>💼 Experience</h2>
-    <p><strong>Security Signature Engineer – Qualys (03/2018 – Present)</strong></p>
-    <ul>
-      <li>Managed signature creation for critical zero-day CVEs.</li>
-      <li>Worked on Qualys VMDR IDS across Linux, Windows, and macOS.</li>
-      <li>Built CI/CD pipelines using Jenkins and containerized using Docker & Kubernetes.</li>
-      <li>Infrastructure as Code (IaC) using Terraform and configuration management with Ansible.</li>
-    </ul>
+    <div class="timeline">
+      <p><strong>Security Signature Engineer – Qualys (03/2018 – Present)</strong></p>
+      <ul>
+        <li>Managed signature creation for critical zero-day CVEs.</li>
+        <li>Worked on Qualys VMDR IDS across Linux, Windows, and macOS.</li>
+        <li>Built CI/CD pipelines using Jenkins and containerized using Docker & Kubernetes.</li>
+        <li>Infrastructure as Code (IaC) using Terraform and configuration management with Ansible.</li>
+      </ul>
+    </div>
   </section>
 
   <section id="skills" class="skills section">
     <h2>🛠️ Skills</h2>
-    <h4>Cybersecurity</h4>
     <ul class="skills">
-      <li>Vulnerability Management, IDS (Qualys VMDR), IAM</li>
-      <li>Firewall, Encryption, Zero-day threat analysis</li>
-    </ul>
-    <h4>DevOps & Automation</h4>
-    <ul class="skills">
-      <li>Jenkins, Docker, Kubernetes, Terraform, Ansible, Git</li>
-    </ul>
-    <h4>Linux Administration</h4>
-    <ul class="skills">
-      <li>Debian, Ubuntu, RHEL, Shell scripting, Cron jobs</li>
-    </ul>
-    <h4>Cloud & AI</h4>
-    <ul class="skills">
-      <li>AWS: EC2, IAM, RDS, S3, CloudFront, Route 53, Lambda</li>
+      <li>Cybersecurity: IDS, firewalls, IAM, encryption</li>
+      <li>DevOps: Jenkins, Docker, Kubernetes, Terraform, Ansible, Git</li>
+      <li>Linux: Debian, Ubuntu, RHEL, Shell scripting, Cron jobs</li>
+      <li>Cloud: AWS EC2, IAM, RDS, S3, CloudFront, Route 53, Lambda</li>
       <li>AI Tools: ChatGPT, GitHub Copilot, Google Gemini, Notion AI</li>
-    </ul>
-    <h4>Full Stack & Automation</h4>
-    <ul class="skills">
-      <li>Google Apps Script, Spreadsheet automation, frontend tools</li>
+      <li>Automation: Google Apps Script, Spreadsheet integration</li>
     </ul>
   </section>
 
@@ -264,6 +279,41 @@
   function toggleDarkMode() {
     document.body.classList.toggle('dark');
   }
+
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / 100;
+      if(count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 30);
+      } else {
+        counter.innerText = target;
+      }
+    }
+    updateCount();
+  });
+
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 70;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
 </script>
 
 </body>
