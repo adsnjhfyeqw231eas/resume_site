@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tridev Guha | Resume</title>
+  <title>Tridev Guha | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -14,8 +14,17 @@
       --card: #ffffff;
     }
 
+    body.dark {
+      --primary: #93c5fd;
+      --accent: #60a5fa;
+      --bg: #111827;
+      --text: #f9fafb;
+      --card: #1f2937;
+    }
+
     * {
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -24,6 +33,39 @@
       background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      padding: 12px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .toggle-mode {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
     }
 
     header {
@@ -34,14 +76,12 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+    header img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 15px;
     }
 
     .download-btn {
@@ -88,10 +128,6 @@
       margin-bottom: 30px;
     }
 
-    .contact p, .lang span {
-      margin: 5px 0;
-    }
-
     ul {
       padding-left: 20px;
     }
@@ -122,6 +158,11 @@
       font-size: 0.9rem;
     }
 
+    body.dark .lang span {
+      background: #374151;
+      color: #f9fafb;
+    }
+
     @media (max-width: 600px) {
       header h1 {
         font-size: 2rem;
@@ -135,14 +176,26 @@
 </head>
 <body>
 
+<nav>
+  <div>
+    <a href="#contact">Contact</a>
+    <a href="#summary">Summary</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+  </div>
+  <button class="toggle-mode" onclick="toggleDarkMode()">Toggle Mode</button>
+</nav>
+
 <header>
+  <img src="https://media.licdn.com/dms/image/v2/D4D03AQHY2uq13Tlsxg/profile-displayphoto-shrink_800_800/B4DZZR9nghHIAg-/0/1745131829742?e=1750896000&v=beta&t=vCVKW56H4m5r3biOZWc18649VxTIBLJYWUP0GCxYQpE" alt="Tridev Guha">
   <h1>Tridev Guha</h1>
   <p>Security Signature Engineer | DevOps | Cloud | Cybersecurity | AI</p>
   <a href="Tridev_Guha_Resume.pdf" download class="download-btn">📄 Download Resume</a>
 </header>
 
 <div class="container">
-  <section class="contact section">
+  <section id="contact" class="contact section">
     <h2>📬 Contact</h2>
     <p>Email: <a href="mailto:tridevguha17@gmail.com">tridevguha17@gmail.com</a></p>
     <p>Phone: +91 9163124284</p>
@@ -151,12 +204,12 @@
     <p>GitHub: <a href="https://github.com/adsnjhfyeqw231eas" target="_blank">github.com/adsnjhfyeqw231eas</a></p>
   </section>
 
-  <section class="summary section">
+  <section id="summary" class="summary section">
     <h2>🧠 Professional Summary</h2>
     <p>Tech-savvy IT professional with 6+ years of experience in cybersecurity, DevOps, cloud, and AI-driven development. Skilled in Docker, Jenkins, Linux, and tools like ChatGPT and Copilot. Proven ability to streamline operations, automate workflows, and secure infrastructure in enterprise environments.</p>
   </section>
 
-  <section class="experience section">
+  <section id="experience" class="experience section">
     <h2>💼 Experience</h2>
     <p><strong>Security Signature Engineer – Qualys (03/2018 – Present)</strong></p>
     <ul>
@@ -167,7 +220,7 @@
     </ul>
   </section>
 
-  <section class="skills section">
+  <section id="skills" class="skills section">
     <h2>🛠️ Skills</h2>
     <h4>Cybersecurity</h4>
     <ul class="skills">
@@ -193,23 +246,7 @@
     </ul>
   </section>
 
-  <section class="education section">
-    <h2>🎓 Education</h2>
-    <ul>
-      <li>PG-DITISS | CDAC (2017 – 2018)</li>
-      <li>B.Tech | Techno India University (2013 – 2017)</li>
-    </ul>
-  </section>
-
-  <section class="certificates section">
-    <h2>📜 Certificates</h2>
-    <ul>
-      <li>RHCSA – Red Hat Certified System Administrator – 2020</li>
-      <li>DevOps PG Program – Caltech Simplilearn – 2023</li>
-    </ul>
-  </section>
-
-  <section class="projects section">
+  <section id="projects" class="projects section">
     <h2>💻 Projects</h2>
     <a href="https://github.com/adsnjhfyeqw231eas/ContainerizedShoppingAPP" target="_blank">🛍️ Containerized Shopping App</a>
     <a href="https://github.com/adsnjhfyeqw231eas/Banking-Microservices-app" target="_blank">🏦 Banking Microservices App</a>
@@ -222,6 +259,12 @@
     <span>Bengali</span>
   </section>
 </div>
+
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+</script>
 
 </body>
 </html>
