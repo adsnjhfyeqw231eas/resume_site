@@ -3,77 +3,226 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tridev Guha | Resume</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Tridev Guha | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #1e40af;
+      --accent: #2563eb;
+      --bg: #f9fafb;
+      --text: #111827;
+      --card: #ffffff;
+    }
+
+    body.dark {
+      --primary: #93c5fd;
+      --accent: #60a5fa;
+      --bg: #111827;
+      --text: #f9fafb;
+      --card: #1f2937;
+    }
+
     * {
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
+
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f4f7fa;
-      color: #2c3e50;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
     }
-    header {
-      background: #1e3a8a;
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      padding: 12px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a.active {
+      border-bottom: 2px solid var(--accent);
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .toggle-mode {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent);
       color: white;
-      padding: 30px;
+      cursor: pointer;
+    }
+
+    header {
+      background: linear-gradient(120deg, var(--primary), var(--accent));
+      color: white;
+      padding: 50px 20px;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    header h1 {
-      margin: 0;
+
+    header img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 15px;
     }
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
+
+    .download-btn {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      color: var(--primary);
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 8px;
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--card);
+      color: var(--accent);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--card);
       padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      animation: fadeIn 0.6s ease-out;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h2 {
-      color: #1e3a8a;
-      margin-top: 30px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+      margin-top: 40px;
     }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
     ul {
       padding-left: 20px;
     }
+
+    .skills li::before {
+      content: '✔️ ';
+      margin-right: 5px;
+    }
+
     a {
-      color: #1e3a8a;
+      color: var(--accent);
       text-decoration: none;
     }
-    .section {
-      margin-bottom: 25px;
-    }
-    .contact p {
-      margin: 4px 0;
-    }
-    .skills li::before {
-      content: "🟢 ";
-    }
+
     .projects a {
       display: block;
-      margin-bottom: 6px;
+      margin: 8px 0;
+      font-weight: 500;
     }
+
     .lang span {
       display: inline-block;
-      background: #e2e8f0;
-      margin: 5px;
-      padding: 6px 12px;
-      border-radius: 6px;
+      background: #e5e7eb;
+      color: #1f2937;
+      padding: 6px 14px;
+      margin: 5px 6px 0 0;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    body.dark .lang span {
+      background: #374151;
+      color: #f9fafb;
+    }
+
+    .timeline {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -9px;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .counter {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
+<nav>
+  <div>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#summary" class="nav-link">Summary</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#projects" class="nav-link">Projects</a>
+  </div>
+  <button class="toggle-mode" onclick="toggleDarkMode()">Toggle Mode</button>
+</nav>
+
 <header>
+  <img src="https://media.licdn.com/dms/image/v2/D4D03AQHY2uq13Tlsxg/profile-displayphoto-shrink_800_800/B4DZZR9nghHIAg-/0/1745131829742?e=1750896000&v=beta&t=vCVKW56H4m5r3biOZWc18649VxTIBLJYWUP0GCxYQpE" alt="Tridev Guha">
   <h1>Tridev Guha</h1>
   <p>Security Signature Engineer | DevOps | Cloud | Cybersecurity | AI</p>
+  <a href="Tridev_Guha_Resume.pdf" download class="download-btn">📄 Download Resume</a>
 </header>
 
 <div class="container">
-  <section class="contact section">
+  <section id="contact" class="contact section">
     <h2>📬 Contact</h2>
     <p>Email: <a href="mailto:tridevguha17@gmail.com">tridevguha17@gmail.com</a></p>
     <p>Phone: +91 9163124284</p>
@@ -82,69 +231,37 @@
     <p>GitHub: <a href="https://github.com/adsnjhfyeqw231eas" target="_blank">github.com/adsnjhfyeqw231eas</a></p>
   </section>
 
-  <section class="summary section">
+  <section id="summary" class="summary section">
     <h2>🧠 Professional Summary</h2>
-    <p>Tech-savvy and results-driven IT professional with 6+ years of experience in cybersecurity, DevOps, and infrastructure management at Qualys. Skilled in AI-driven automation and scripting with tools like ChatGPT, Copilot, and Google AI. Experienced in prompt engineering and building smarter, efficient tech solutions.</p>
+    <p>Tech-savvy IT professional with <span class="counter" data-target="7">0</span>+ years of experience in cybersecurity, DevOps, cloud, and AI-driven development. Skilled in Docker, Jenkins, Linux, and tools like ChatGPT and Copilot. Proven ability to streamline operations, automate workflows, and secure infrastructure in enterprise environments.</p>
   </section>
 
-  <section class="experience section">
+  <section id="experience" class="experience section">
     <h2>💼 Experience</h2>
-    <p><strong>Security Signature Engineer</strong> – Qualys (03/2018 – Present)</p>
-    <ul>
-      <li>Oversaw security signature creation and zero-day CVE detection.</li>
-      <li>Managed Qualys VMDR IDS on Linux, Windows, macOS.</li>
-      <li>CI/CD with Jenkins, Docker & Kubernetes for containerization.</li>
-      <li>Used Ansible & Terraform for infrastructure automation.</li>
-    </ul>
+    <div class="timeline">
+      <p><strong>Security Signature Engineer – Qualys (03/2018 – Present)</strong></p>
+      <ul>
+        <li>Managed signature creation for critical zero-day CVEs.</li>
+        <li>Worked on Qualys VMDR IDS across Linux, Windows, and macOS.</li>
+        <li>Built CI/CD pipelines using Jenkins and containerized using Docker & Kubernetes.</li>
+        <li>Infrastructure as Code (IaC) using Terraform and configuration management with Ansible.</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="skills section">
+  <section id="skills" class="skills section">
     <h2>🛠️ Skills</h2>
-    <h4>Cybersecurity</h4>
     <ul class="skills">
-      <li>Vulnerability Management, IDS (Qualys VMDR)</li>
-      <li>Firewall, IAM, Encryption</li>
-    </ul>
-    <h4>DevOps & Automation</h4>
-    <ul class="skills">
-      <li>Jenkins, Docker, Kubernetes, Terraform, Ansible, Git</li>
-      <li>CI/CD, IAC, Config Management</li>
-    </ul>
-    <h4>Linux System Administration</h4>
-    <ul class="skills">
-      <li>Debian, Ubuntu, RHEL – Shell, cron jobs, system troubleshooting</li>
-    </ul>
-    <h4>Full Stack Development</h4>
-    <ul class="skills">
-      <li>Google Apps Script + Google Sheets automation</li>
-    </ul>
-    <h4>AWS Cloud</h4>
-    <ul class="skills">
-      <li>EC2, S3, IAM, RDS, Lambda, Route 53, CloudFront</li>
-    </ul>
-    <h4>AI Tools</h4>
-    <ul class="skills">
-      <li>ChatGPT, GitHub Copilot, Gemini, Notion AI, Zapier</li>
+      <li>Cybersecurity: IDS, firewalls, IAM, encryption</li>
+      <li>DevOps: Jenkins, Docker, Kubernetes, Terraform, Ansible, Git</li>
+      <li>Linux: Debian, Ubuntu, RHEL, Shell scripting, Cron jobs</li>
+      <li>Cloud: AWS EC2, IAM, RDS, S3, CloudFront, Route 53, Lambda</li>
+      <li>AI Tools: ChatGPT, GitHub Copilot, Google Gemini, Notion AI</li>
+      <li>Automation: Google Apps Script, Spreadsheet integration</li>
     </ul>
   </section>
 
-  <section class="education section">
-    <h2>🎓 Education</h2>
-    <ul>
-      <li>PG-DITISS | CDAC (08/2017 – 02/2018)</li>
-      <li>B.Tech | Techno India University (01/2013 – 12/2017)</li>
-    </ul>
-  </section>
-
-  <section class="certificates section">
-    <h2>📜 Certificates</h2>
-    <ul>
-      <li>Red Hat Certified System Administrator (RHCSA) – 02/2020</li>
-      <li>Post-Graduate Program in DevOps (Caltech Simplilearn) – 11/2023</li>
-    </ul>
-  </section>
-
-  <section class="projects section">
+  <section id="projects" class="projects section">
     <h2>💻 Projects</h2>
     <a href="https://github.com/adsnjhfyeqw231eas/ContainerizedShoppingAPP" target="_blank">🛍️ Containerized Shopping App</a>
     <a href="https://github.com/adsnjhfyeqw231eas/Banking-Microservices-app" target="_blank">🏦 Banking Microservices App</a>
@@ -152,9 +269,52 @@
 
   <section class="lang section">
     <h2>🌐 Languages</h2>
-    <span>English</span> <span>Hindi</span> <span>Bengali</span>
+    <span>English</span>
+    <span>Hindi</span>
+    <span>Bengali</span>
   </section>
 </div>
+
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / 100;
+      if(count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 30);
+      } else {
+        counter.innerText = target;
+      }
+    }
+    updateCount();
+  });
+
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 70;
+      if (pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
